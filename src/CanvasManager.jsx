@@ -27,7 +27,6 @@ class CanvasManager {
     };
 
     //draw mask
-
     //If the image is uploaded than image is displayed in place of mask
     if (this.image) {
       const maskImage = new Image();
@@ -57,21 +56,6 @@ class CanvasManager {
     this.drawMaskStroke();
     // Draw text elements
     this.drawText();
-  }
-
-  updateImage(newImage) {
-    this.image = newImage;
-    this.initializeCanvas();
-  }
-
-  updateCaptionText(newText) {
-    this.captionText = newText;
-    this.initializeCanvas();
-  }
-
-  updateCtaText(newText) {
-    this.ctaText = newText;
-    this.initializeCanvas();
   }
 
   drawImageWithMask = (image, mask, x, y, width, height) => {
@@ -160,7 +144,6 @@ class CanvasManager {
       const testWidth = this.ctx.measureText(testLine).width;
 
       if (testWidth > max_characters_per_line * (font_size / 2)) {
-        // Adjust the factor for better results
         lines.push(currentLine.trim());
         currentLine = word + " ";
       } else {
@@ -201,13 +184,7 @@ class CanvasManager {
     offScreenContext.clearRect(0, 0, rectWidth, rectHeight);
 
     // Draw the rounded rectangle on the off-screen canvas
-    offScreenContext.roundRect(
-      0, // Assuming (0,0) is the starting point of your rectangle on the off-screen canvas
-      0,
-      rectWidth,
-      rectHeight,
-      10
-    );
+    offScreenContext.roundRect(0, 0, rectWidth, rectHeight, 10);
     offScreenContext.fillStyle = bgColor;
     offScreenContext.fill();
 
@@ -265,7 +242,7 @@ class CanvasManager {
     const totalHeight = lines.length * font_size;
 
     // Ensure minimum height
-    const minHeight = font_size + 20; // Adjust this value as needed
+    const minHeight = font_size + 20;
     const rectHeight = Math.max(minHeight, totalHeight + 20);
 
     return { rectWidth: totalWidth + 40, rectHeight, lines };

@@ -35,13 +35,11 @@ const Editor = ({ templateData }) => {
   const handleCaptionChange = (e) => {
     const newText = e.target.value;
     setCaptionText(newText);
-    canvasManager.updateCaptionText(newText);
   };
 
   const handleCtaChange = (e) => {
     const newText = e.target.value;
     setCtaText(newText);
-    canvasManager.updateCtaText(newText);
   };
 
   const handleClick = (event) => {
@@ -72,9 +70,6 @@ const Editor = ({ templateData }) => {
       // Keep only the last 5 colors in the history
       return newColors.slice(-5);
     });
-
-    // Hide the color picker popover after selecting a color
-    // setColorPickerVisible(false);
   };
   const handleColorHistoryClick = (color) => {
     setBackgroundColor(color);
